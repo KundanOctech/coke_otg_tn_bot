@@ -1,0 +1,1 @@
+rsync --verbose --recursive --progress app/ bigcity-dev:/var/www/html/coke/otg-bot-tn/api/app
