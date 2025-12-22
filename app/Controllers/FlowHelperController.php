@@ -150,12 +150,7 @@ class FlowHelperController extends Controller
                 $userData = User::where('id', $userData->id)->first();
                 $postData = [
                     'event_type' => 'Enter',
-                    'event_sub_type' => 'Submit_Code_' . $userData->valid_code_count
-                ];
-                $this->pushToCDP($postData, $userData);
-                $postData = [
-                    'event_type' => 'Enter',
-                    'event_sub_type' => 'Runs_Scored_Code' . $userData->valid_code_count
+                    'event_sub_type' => 'Submit_Code_TN_' . $userData->valid_code_count
                 ];
                 $this->pushToCDP($postData, $userData);
                 [$screen, $result] = $this->askQuestion($userData, $flowTokenData, $uniqueCode);
@@ -183,6 +178,11 @@ class FlowHelperController extends Controller
                 'total_answer_count' => DB::raw('total_answer_count + 1')
             ]);
             [$screen, $result] = AddUniqueCodeFlowHelper::getWrongAnswerResponse($flowTokenData->flow_token, $userData);
+            $postData = [
+                'event_type' => 'Enter',
+                'event_sub_type' => 'Quiz_Incorrect'
+            ];
+            $this->pushToCDP($postData, $userData);
             return [$screen, $result];
         }
         UniqueCode::where('code', $userData->last_unique_code)->update([
@@ -193,8 +193,12 @@ class FlowHelperController extends Controller
             'total_answer_count' => DB::raw('total_answer_count + 1'),
             'correct_answer_count' => DB::raw('correct_answer_count + 1'),
         ]);
-
         $userData = User::where('id', $userData->id)->first();
+        $postData = [
+            'event_type' => 'Enter',
+            'event_sub_type' => 'Quiz_Answered_TN_' . $userData->correct_answer_count
+        ];
+        $this->pushToCDP($postData, $userData);
         // echo 'correct answers: ' . $userData->correct_answer_count . '<br>';
         return $this->makeWinner($userData, $flowTokenData, $uniqueCodeData->code);
     }
@@ -221,12 +225,12 @@ class FlowHelperController extends Controller
                 if ($winnerData->reward_name == GenericConstant::$winTypeTicket) {
                     $postData = [
                         'event_type' => 'Click',
-                        'event_sub_type' => 'Match_Tickets_Not_Claimed'
+                        'event_sub_type' => 'Match_Tickets_Not_Claimed_TN'
                     ];
                 } else {
                     $postData = [
                         'event_type' => 'Click',
-                        'event_sub_type' => 'ThumsUp_Merch_Not_Claimed'
+                        'event_sub_type' => 'ThumsUp_Merch_Not_Claimed_TN'
                     ];
                 }
                 $this->pushToCDP($postData, $userData);
@@ -267,7 +271,7 @@ class FlowHelperController extends Controller
 
                         $postData = [
                             'event_type' => 'Click',
-                            'event_sub_type' => 'Win_PhonePe'
+                            'event_sub_type' => 'Win_PhonePe_TN'
                         ];
                         $this->pushToCDP($postData, $userData);
                     }
@@ -438,12 +442,12 @@ class FlowHelperController extends Controller
                 if ($winnerData->reward_name == GenericConstant::$winTypeTicket) {
                     $postData = [
                         'event_type' => 'Click',
-                        'event_sub_type' => 'Claim_Form_Match_tickets',
+                        'event_sub_type' => 'Claim_Form_Match_tickets_TN',
                     ];
                 } else {
                     $postData = [
                         'event_type' => 'Click',
-                        'event_sub_type' => 'Claim_Form_ThumsUp_Merch',
+                        'event_sub_type' => 'Claim_form_ThumsUp_Merch_TN',
                     ];
                 }
                 $postData['email'] = $email;
@@ -477,7 +481,7 @@ class FlowHelperController extends Controller
         ]);
         $postData = [
             'event_type' => 'Click',
-            'event_sub_type' => 'Match_Tickets_Preferred_Cities'
+            'event_sub_type' => 'Match_Tickets_Preferred_Cities_TN'
         ];
         $this->pushToCDP($postData, $userData);
         return ClaimFormFlowHelper::getClaimFormResponse($flowTokenData, $userData);

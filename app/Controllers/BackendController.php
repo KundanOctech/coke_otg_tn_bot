@@ -119,14 +119,14 @@ class BackendController extends BackendHelperController
                     'claimed_ticket' => null,
                     'ticket_expired' => 1,
                 ];
-                $cdpEvent = 'ICC_Match_Ticket_Forfeited';
+                $cdpEvent = 'ICC_Match_Ticket_Forfeited_TN';
             } else {
                 $updateList = [
                     'is_merch_winner' => 0,
                     'claimed_merch' => null,
                     'merch_expired' => 1,
                 ];
-                $cdpEvent = 'ThumsUp_Merch_Forfeited';
+                $cdpEvent = 'ThumsUp_Merch_Forfeited_TN';
             }
             User::where('id', $winnerData->user_id)
                 ->update($updateList);

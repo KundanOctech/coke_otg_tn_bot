@@ -29,7 +29,7 @@ class UsersHelperController extends Controller
     {
         $payload = [
             'event_type' => 'Enter',
-            'event_sub_type' => 'Submit_Reg',
+            'event_sub_type' => 'Submit_Reg_TN',
             'first_name'  => $this->removeEmoji($name),
             'targeting_age_from' => '18',
             'communication_preferences/sms_message' => 1,
@@ -50,7 +50,7 @@ class UsersHelperController extends Controller
     {
         $payload = [
             'event_type' => 'Enter',
-            'event_sub_type' => 'Login',
+            'event_sub_type' => 'Login_TN',
             'first_name'  => $this->removeEmoji($name),
             'communication_preferences/sms_message' => 1,
             'communication_preferences/phone_call' => 1,
@@ -82,7 +82,7 @@ class UsersHelperController extends Controller
         UserSession::updateUserSession($userData->last_session_id);
         $postData = [
             'event_type' => 'Enter',
-            'event_sub_type' => 'Opt_Out',
+            'event_sub_type' => 'Opt_Out_TN',
             'communication_preferences/sms_message' => 0,
             'communication_preferences/phone_call' => 0,
             'communication_preferences/email' => 0,
@@ -102,7 +102,7 @@ class UsersHelperController extends Controller
             $this->trackEventAndUserCount($userData, GenericConstant::$clickTypeHowToParticipate);
             $postData = [
                 'event_type' => 'Click',
-                'event_sub_type' => 'How_To_Participate'
+                'event_sub_type' => 'How_To_Participate_TN'
             ];
             $this->pushToCDP($postData, $userData);
             $updated = true;
@@ -150,15 +150,15 @@ class UsersHelperController extends Controller
         $eventName = '';
 
         if ($brand == 'FANTA') {
-            $eventName = 'Select_brand_Fanta';
+            $eventName = 'Select_brand_TN_Fanta';
         } elseif ($brand == 'THUMS UP') {
-            $eventName = 'Select_brand_Thums_Up';
+            $eventName = 'Select_brand_TN_Thums_Up';
         } elseif ($brand == 'SPRITE') {
-            $eventName = 'Select_brand_Sprite';
+            $eventName = 'Select_brand_TN_Sprite';
         } elseif ($brand == 'COCA-COLA') {
-            $eventName = 'Select_brand_Coca_Cola';
+            $eventName = 'Select_brand_TN_Coca_Cola';
         } elseif ($brand == 'LIMCA') {
-            $eventName = 'Select_brand_Limca';
+            $eventName = 'Select_brand_TN_Limca';
         }
 
         if (!empty($eventName)) {
@@ -182,7 +182,7 @@ class UsersHelperController extends Controller
 
         $postData = [
             'event_type' => 'Click',
-            'event_sub_type' => 'Change_Language',
+            'event_sub_type' => 'Change_Language_TN',
             'language_code' => strtoupper($language)
         ];
         $this->pushToCDP($postData, $userData);

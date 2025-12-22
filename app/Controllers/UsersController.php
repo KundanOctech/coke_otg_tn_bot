@@ -386,7 +386,7 @@ class UsersController extends UsersHelperController
         ApiLog::addLog($userData->id, 'BUY-OUT-API', $output, $input);
         $postData = [
             'event_type' => 'Click',
-            'event_sub_type' => 'Buy_Now'
+            'event_sub_type' => 'Buy_Now_TN'
         ];
         $this->pushToCDP($postData, $userData);
         return $res->withJson($output, 200);
