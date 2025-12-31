@@ -11,7 +11,7 @@ class MixCode
     private $mixcodeBaseUrl;
     private $programId;
     private $programSecret;
-    private $devMode = true;
+    private $devMode = false;
 
     public function __construct($container)
     {

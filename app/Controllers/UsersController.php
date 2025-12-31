@@ -13,6 +13,7 @@ use App\Models\DailyCodeCount;
 use App\Models\FlowToken;
 use App\Models\MassRewardQuota;
 use App\Models\MessageCount;
+use App\Models\RoiUser;
 use App\Models\Survey;
 use App\Models\UserSession;
 use App\Models\Winner;
@@ -50,6 +51,24 @@ class UsersController extends UsersHelperController
             ], 200);
         }
         $mobileEnc = Hash::encryptData($mobile);
+        $roiUser = RoiUser::where('mobile', $mobileEnc)->first();
+        if (!empty($roiUser) && $roiUser->registered) {
+            $resp = $this->getSuccessMessage([
+                "newUser" => false,
+                "outsideMagicHours" => $this->outsideTimeWindow(),
+                "language" => 'en',
+                "canAddCode" => false,
+                "isTicketWinner" => false,
+                "canClaimTicket" => false,
+                "isMerchWinner" => false,
+                "canClaimMerch" => false,
+                "wonAllReward" => false,
+                "isFromTN" => false,
+                "isActive" => true
+            ]);
+
+            return $res->withJson($resp, 200);
+        }
         $userData = User::where('mobile', $mobileEnc)->first();
 
         if (empty($userData)) {
@@ -127,8 +146,8 @@ class UsersController extends UsersHelperController
             "isMerchWinner" => boolval($userData->is_merch_winner),
             "canClaimMerch" => $userData->is_merch_winner && !$userData->claimed_merch,
             "wonAllReward" => $wonAllReward,
-            "isFromTN" => true, //User::fromTn($userData),
-            'isActive' => strtotime('now') >= strtotime('2025-12-15')
+            "isFromTN" => true,
+            "isActive" => true
         ]);
         $sourceDetails = [
             'source' => $source,

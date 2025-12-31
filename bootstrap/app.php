@@ -8,13 +8,23 @@ $app = new \Slim\App([
         'db' => [
             'driver' => 'mysql',
             'host' => '127.0.0.1',
-            'database' => 'y26_01_otg_tn',
+            'database' => 'otg_tn_01_2026',
             'username' => 'root',
             'password' => 'root',
             'charset'   => 'utf8mb4',
             'collation' => 'utf8mb4_general_ci',
             'prefix'    => 'otg_tn_',
-        ]
+        ],
+        'db_second' => [ // ROI connection
+            'driver' => 'mysql',
+            'host' => '127.0.0.1',
+            'database' => 'otg_12_2025',
+            'username' => 'root',
+            'password' => 'root',
+            'charset'   => 'utf8mb4',
+            'collation' => 'utf8mb4_general_ci',
+            'prefix'    => 'coke_otg_',
+        ],
     ]
 ]);
 
@@ -22,6 +32,7 @@ $container = $app->getContainer();
 
 $capsule = new \Illuminate\Database\Capsule\Manager;
 $capsule->addConnection($container['setting']['db']);
+$capsule->addConnection($container['setting']['db_second'], 'db_second');
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
@@ -41,8 +52,8 @@ $container['notFoundHandler'] = function ($c) {
 date_default_timezone_set("Asia/Kolkata");
 
 $container['CDS_BASE_URL'] = "apac.gcds.coke.com";
-$container['CDS_CLIENT_ID'] = "52055b17-5a2d-4f16-8956-dcee28cc047f";
-$container['CDS_API_KEY'] = "km5f19535bO9Fb4l4280nB0DBw9B3494233551vp";
+$container['CDS_CLIENT_ID'] = "759de256-7410-4059-8082-dfa58ef5ea1c";
+$container['CDS_API_KEY'] = "sfeA261483pD31FN45f4tB399T851dD837C219yj";
 
 // $container['CDS_BASE_URL'] = "beta.apac.gcds.coke.com";
 // $container['CDS_CLIENT_ID'] = "fb4a945f-761a-4792-b663-56287d96872a";
@@ -53,8 +64,8 @@ $container['CDS_API_KEY'] = "km5f19535bO9Fb4l4280nB0DBw9B3494233551vp";
 // $container['MIXCODE_SECRET_KEY'] = "MDFKWUs0RUFSSlBRUVJQNDIyMzZYWlZER0M6MjBkODg3YjUtNjUzMi00ZDEwLWE5ZDItZGE2Y2JjNGQyZjZi";
 
 $container['MIXCODE_BASE_URL'] = "https://mixcodes.coke.com";
-$container['MIXCODE_PROGRAM_ID'] = "01K9PFH3HRF1W3XDYFC6YP5WMP";
-$container['MIXCODE_SECRET_KEY'] = "MDFLOVBGSDNIUkYxVzNYRFlGQzZZUDVXTVA6YWUwNDUyNDctOTljYy00MzNkLTk3YjYtM2RiMWU5MmVlZGMy";
+$container['MIXCODE_PROGRAM_ID'] = "01KAZWFZRBA7SYZ2AH081YX97X";
+$container['MIXCODE_SECRET_KEY'] = "MDFLQVpXRlpSQkE3U1laMkFIMDgxWVg5N1g6MDQ4NTI0ODItZmNjZC00ZjI5LWFhMzEtMzYyMjlmYzA0YWIy";
 
 // $container['WA_BOT_NO'] = "918130658881";
 // $container['WA_BASE_URL'] = "https://3v4zdv.api.infobip.com";
@@ -62,7 +73,7 @@ $container['MIXCODE_SECRET_KEY'] = "MDFLOVBGSDNIUkYxVzNYRFlGQzZZUDVXTVA6YWUwNDUy
 
 $container['WA_BOT_NO'] = "919220370800";
 $container['WA_BASE_URL'] = "https://d92p28.api.infobip.com/";
-$container['WA_AUTH_TOKEN'] = "4f20214b047991695e0c77f4a28ecf3d-316f9a8b-a6ea-4573-9904-e4c25d95a50f";
+$container['WA_AUTH_TOKEN'] = "5645800cc983d95b83b7e0144883f031-7846b002-af83-4723-9f31-2330968cdc11";
 
 
 $container['db'] = function ($container) use ($capsule) {
