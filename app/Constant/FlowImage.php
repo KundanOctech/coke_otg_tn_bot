@@ -5,25 +5,25 @@ namespace App\Constant;
 class FlowImage
 {
     public static $kvImage = [
-        'en' => 'kv/kv-en.jpg',
-        'ta' => '',
+        'en' => 'kv/TN-en-kv.jpg',
+        'ta' => 'kv/TN-ta-kv.jpg',
     ];
 
     public static $htpImage = [
-        'en' => 'htp/htp-en.jpg',
-        'ta' => '',
+        'en' => 'htp/TN-en-htp.jpg',
+        'ta' => 'htp/TN-ta-htp.jpg',
     ];
     public static $phonepeImage = [
-        'en' => 'phonepe/phonepe-en.jpg',
-        'ta' => '',
+        'en' => 'phonepe/en-phonepe.jpg',
+        'ta' => 'phonepe/ta-phonepe.jpg',
     ];
 
     public static $matchTicketImage = [
-        'en' => 'match-ticket/match-ticket-en.jpg',
-        'ta' => '',
+        'en' => 'match-ticket/en-ticket.jpg',
+        'ta' => 'match-ticket/ta-ticket.jpg',
     ];
     public static $merchImage = [
-        'en' => 'merch/merch-en.jpg',
-        'ta' => '',
+        'en' => 'merch/en-merch.jpg',
+        'ta' => 'merch/ta-merch.jpg',
     ];
 }
