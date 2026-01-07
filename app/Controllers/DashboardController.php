@@ -406,10 +406,8 @@ class DashboardController extends DashboardHelperController
                 date: "registration_date"
             ));
 
-            $totalmass6 = MassRewardCode::where('amount', 6)->count();
-            $totalmass20 = MassRewardCode::where('amount', 20)->count();
-            $totalmass50 = MassRewardCode::where('amount', 50)->count();
-            $totalmass100 = MassRewardCode::where('amount', 100)->count();
+            $totalmass5 = MassRewardCode::where('amount', 5)->count();
+            $totalmass10 = MassRewardCode::where('amount', 10)->count();
 
             $uniquCode = $this->getDateWiseCount($this->getCount(
                 $startDate,
@@ -427,22 +425,15 @@ class DashboardController extends DashboardHelperController
             // $totalMavrick = BumperReward::where('reward_name', 'Mavrick')->count();
             // $totalXtreme = BumperReward::where('reward_name', 'Xtreme')->count();
 
-            $totalmass20Used = MassRewardCode::where('amount', 20)->where('assigned', 1)->count();
-            $totalmass6Used = MassRewardCode::where('amount', 6)->where('assigned', 1)->count();
-            $totalmass50Used = MassRewardCode::where('amount', 50)->where('assigned', 1)->count();
-            $totalmass100Used = MassRewardCode::where('amount', 100)->where('assigned', 1)->count();
+            $totalmass5Used = MassRewardCode::where('amount', 6)->where('assigned', 1)->count();
+            $totalmass10Used = MassRewardCode::where('amount', 20)->where('assigned', 1)->count();
 
-            $totalYMass6Used = $this->getDateWiseCount($this->getWinnerCount($startDate, $endDate, new MassRewardCode(), "MASS_WINNER_PHONE_6", 6, 1, ["amount", "assigned"], "assigned_date"));
-            $yesterdayMass6Used = $this->getDateWiseCount($this->getWinnerCount($endDate, $endDate, new MassRewardCode(), "MASS_WINNER_PHONE_6", 6, 1, ["amount", "assigned"], "assigned_date"));
+            $totalYMass5Used = $this->getDateWiseCount($this->getWinnerCount($startDate, $endDate, new MassRewardCode(), "MASS_WINNER_PHONE_5", 5, 1, ["amount", "assigned"], "assigned_date"));
+            $yesterdayMass5Used = $this->getDateWiseCount($this->getWinnerCount($endDate, $endDate, new MassRewardCode(), "MASS_WINNER_PHONE_5", 5, 1, ["amount", "assigned"], "assigned_date"));
 
-            $totalYMass20Used = $this->getDateWiseCount($this->getWinnerCount($startDate, $endDate, new MassRewardCode(), "MASS_WINNER_PHONE_20", 20, 1, ["amount", "assigned"], "assigned_date"));
-            $yesterdayMass20Used = $this->getDateWiseCount($this->getWinnerCount($endDate, $endDate, new MassRewardCode(), "MASS_WINNER_PHONE_20", 20, 1, ["amount", "assigned"], "assigned_date"));
+            $totalYMass10Used = $this->getDateWiseCount($this->getWinnerCount($startDate, $endDate, new MassRewardCode(), "MASS_WINNER_PHONE_20", 10, 1, ["amount", "assigned"], "assigned_date"));
+            $yesterdayMass10Used = $this->getDateWiseCount($this->getWinnerCount($endDate, $endDate, new MassRewardCode(), "MASS_WINNER_PHONE_20", 10, 1, ["amount", "assigned"], "assigned_date"));
 
-            $totalYMass50Used = $this->getDateWiseCount($this->getWinnerCount($startDate, $endDate, new MassRewardCode(), "MASS_WINNER_PHONE_50", 50, 1, ["amount", "assigned"], "assigned_date"));
-            $yesterdayMass50Used = $this->getDateWiseCount($this->getWinnerCount($endDate, $endDate, new MassRewardCode(), "MASS_WINNER_PHONE_50", 50, 1, ["amount", "assigned"], "assigned_date"));
-
-            $totalYMass100Used = $this->getDateWiseCount($this->getWinnerCount($startDate, $endDate, new MassRewardCode(), "MASS_WINNER_PHONE_100", 100, 1, ["amount", "assigned"], "assigned_date"));
-            $yesterdayMass100Used = $this->getDateWiseCount($this->getWinnerCount($endDate, $endDate, new MassRewardCode(), "MASS_WINNER_PHONE_100", 100, 1, ["amount", "assigned"], "assigned_date"));
 
             $totalMerch = $this->getDateWiseCount($this->getWinnerCount($startDate, $endDate, new Winner(), "BUMPER_WINNER_MERCH", GenericConstant::$winTypeBumperReward, GenericConstant::$winTypeMerch, ["reward_type", "reward_name"]));
             $totalTicket = $this->getDateWiseCount($this->getWinnerCount($startDate, $endDate, new Winner(), "BUMPER_WINNER_TICKET", GenericConstant::$winTypeBumperReward, GenericConstant::$winTypeTicket, ["reward_type", "reward_name"]));
@@ -469,71 +460,38 @@ class DashboardController extends DashboardHelperController
                 [
                     'value' => $yesterdayUniquCode
                 ],
-                'totalYUsedmass6' =>
+                'totalYUsedmass5' =>
                 [
-                    'value' => $totalYMass6Used
+                    'value' => $totalYMass5Used
                 ],
-                'yesterdayMass6Used' =>
+                'yesterdayMass5Used' =>
                 [
-                    'value' => $yesterdayMass6Used
+                    'value' => $yesterdayMass5Used
                 ],
-                'totalYUsedmass20' =>
+                'totalYUsedmass10' =>
                 [
-                    'value' => $totalYMass20Used
+                    'value' => $totalYMass10Used
                 ],
-                'yesterdayMass20Used' =>
+                'yesterdayMass10Used' =>
                 [
-                    'value' => $yesterdayMass20Used
+                    'value' => $yesterdayMass10Used
                 ],
-                'totalYUsedmass50' =>
+                'totalmass5' =>
                 [
-                    'value' => $totalYMass50Used
+                    'value' => $totalmass5
                 ],
-                'yesterdayMass50Used' =>
+                'totalmass10' =>
                 [
-                    'value' => $yesterdayMass50Used
-                ],
-                'totalYUsedmass100' =>
-                [
-                    'value' => $totalYMass100Used
-                ],
-                'yesterdayMass100Used' =>
-                [
-                    'value' => $yesterdayMass100Used
+                    'value' => $totalmass10
                 ],
 
-                'totalmass6' =>
+                'totalmass5Used' =>
                 [
-                    'value' => $totalmass6
+                    'value' => $totalmass5Used
                 ],
-                'totalmass20' =>
+                'totalmass10Used' =>
                 [
-                    'value' => $totalmass20
-                ],
-                'totalmass50' =>
-                [
-                    'value' => $totalmass50
-                ],
-                'totalmass100' =>
-                [
-                    'value' => $totalmass100
-                ],
-
-                'totalmass6Used' =>
-                [
-                    'value' => $totalmass6Used
-                ],
-                'totalmass20Used' =>
-                [
-                    'value' => $totalmass20Used
-                ],
-                'totalmass50Used' =>
-                [
-                    'value' => $totalmass50Used
-                ],
-                'totalmass100Used' =>
-                [
-                    'value' => $totalmass100Used
+                    'value' => $totalmass10Used
                 ],
                 'totalMerchUsed' =>
                 [
@@ -551,23 +509,14 @@ class DashboardController extends DashboardHelperController
                 [
                     'value' => $yesterdayTicketUsed
                 ],
-                'totalmass6Left' =>
+                'totalmass5Left' =>
                 [
-                    'value' => $totalmass6 - $totalmass6Used
+                    'value' => $totalmass5 - $totalmass5Used
                 ],
-                'totalmass20Left' =>
+                'totalmass10Left' =>
                 [
-                    'value' => $totalmass20 - $totalmass20Used
-                ],
-                'totalmass50Left' =>
-                [
-                    'value' => $totalmass50 - $totalmass50Used
-                ],
-                'totalmass100Left' =>
-                [
-                    'value' => $totalmass100 - $totalmass100Used
-                ],
-
+                    'value' => $totalmass10 - $totalmass10Used
+                ]
             ];
             $output = [
                 'success' => true,
